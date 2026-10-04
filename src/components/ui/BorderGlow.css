@@ -1,0 +1,39 @@
+.border-glow-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.border-glow-canvas,
+.border-glow-gradient {
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+  transition: opacity 0.3s ease;
+}
+
+.border-glow-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.border-glow-border {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 2;
+  transition: border-color 0.3s ease;
+}

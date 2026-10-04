@@ -1,0 +1,33 @@
+.depth-text-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  user-select: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.depth-text-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  display: inline-block;
+  line-height: 1;
+}
+
+.depth-text-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.depth-text-face {
+  position: relative;
+  white-space: nowrap;
+  z-index: 100;
+  display: inline-block;
+}
