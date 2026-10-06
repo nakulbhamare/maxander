@@ -20,6 +20,7 @@ import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { DemoModal } from './components/DemoModal';
 import { KnowledgeModal } from './components/KnowledgeModal';
+import { Agentation } from 'agentation';
 
 export const App: React.FC = () => {
   // Locale detection from URL hash / path or default to 'en'
@@ -56,7 +57,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#07080B] text-[#F4F2ED] flex flex-col font-sans selection:bg-[#D6A856]/25 selection:text-[#FFF]">
+    <div className="min-h-screen bg-white text-[#121417] flex flex-col font-sans selection:bg-[#384BC7]/15 selection:text-[#121417]">
       {/* Top Announcement Bar */}
       <AnnouncementBar
         locale={locale}
@@ -82,7 +83,7 @@ export const App: React.FC = () => {
         {/* 2. Integration Strip */}
         <IntegrationStrip locale={locale} />
 
-        {/* 3. Editorial Transition Statement */}
+        {/* 3. Section [09] Problem & Inquiries Convergence Storytelling */}
         <EditorialIntro locale={locale} />
 
         {/* 4. Section [01] — One Funnel */}
@@ -153,6 +154,9 @@ export const App: React.FC = () => {
         onClose={() => setIsKnowledgeModalOpen(false)}
         locale={locale}
       />
+
+      {/* Agentation Visual Feedback Toolbar */}
+      <Agentation />
     </div>
   );
 };

@@ -15,3 +15,7 @@ export type { GhostCursorProps } from './GhostCursor';
 
 export { DepthText } from './DepthText';
 export type { DepthTextProps } from './DepthText';
+
+export { LogoLoop } from './LogoLoop';
+export type { LogoLoopProps, LogoItem } from './LogoLoop';
+

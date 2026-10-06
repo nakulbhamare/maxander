@@ -12,7 +12,9 @@ import {
   RotateCcw,
   ShieldCheck,
   Building2,
-  Lock
+  Lock,
+  Mail,
+  ArrowRight
 } from 'lucide-react';
 import { Locale, translations } from '../data/translations';
 import confetti from 'canvas-confetti';
@@ -29,24 +31,24 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
   const [activeStep, setActiveStep] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [isApproved, setIsApproved] = useState<boolean>(false);
-  const [selectedTab, setSelectedTab] = useState<'live' | 'audit' | 'knowledge'>('live');
+  const [selectedTab, setSelectedTab] = useState<'live' | 'audit'>('live');
 
   // Sequential autoplay loop
   useEffect(() => {
     if (!isPlaying) return;
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev < 4 ? prev + 1 : 0));
-    }, 3800);
+    }, 4200);
     return () => clearInterval(timer);
   }, [isPlaying]);
 
   const handleApprove = () => {
     setIsApproved(true);
     confetti({
-      particleCount: 45,
+      particleCount: 50,
       spread: 60,
       origin: { y: 0.7 },
-      colors: ['#D6A856', '#ECC67A', '#10B981', '#FFFFFF']
+      colors: ['#384bc7', '#0b935d', '#121417', '#ffffff']
     });
   };
 
@@ -56,57 +58,57 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
   };
 
   return (
-    <div className="relative w-full max-w-5xl mx-auto mt-12 sm:mt-16">
+    <div className="relative w-full max-w-5xl mx-auto mt-10 sm:mt-14">
       {/* Background ambient lighting */}
-      <div className="absolute -inset-4 bg-gradient-to-b from-[#D6A856]/10 via-[#3B82F6]/5 to-transparent rounded-3xl blur-2xl opacity-60 pointer-events-none" />
+      <div className="absolute -inset-4 bg-gradient-to-b from-[#384bc7]/5 via-[#0b935d]/5 to-transparent rounded-3xl blur-2xl opacity-60 pointer-events-none" />
       
       {/* Main Container Card */}
-      <div className="relative rounded-2xl border border-[#1F2739] bg-[#0A0D14]/95 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-xl overflow-hidden">
+      <div className="relative rounded-2xl border border-[#e4e7ec] bg-white shadow-[0_16px_48px_-16px_rgba(16,24,40,0.14)] overflow-hidden">
         {/* Top Window Bar */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[#1A2233] bg-[#0D1017]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[#e4e7ec] bg-[#f8f9fb]">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-[#E05252]/80 border border-[#F27070]/30" />
-              <span className="w-3 h-3 rounded-full bg-[#E5A83B]/80 border border-[#F4BE5B]/30" />
-              <span className="w-3 h-3 rounded-full bg-[#3FB950]/80 border border-[#56D364]/30" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#EA4335]/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FBBC05]/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#34A853]/80" />
             </div>
-            <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-[#20273A] text-[11px] font-mono text-[#8C93A4]">
-              <Lock className="w-3 h-3 text-[#D6A856]" />
-              <span>maxander-inbox // elforo.com (live session)</span>
+            <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-[#e4e7ec] text-[11px] font-mono text-[#626874]">
+              <Lock className="w-3 h-3 text-[#384bc7]" />
+              <span>maxander-inbox // elforo.com (session #882)</span>
             </div>
           </div>
 
           {/* Controls */}
           <div className="flex items-center gap-2">
-            <div className="flex rounded-lg border border-[#222A3D] bg-[#0B0E15] p-0.5 text-[11px] font-mono">
+            <div className="flex rounded-lg border border-[#e4e7ec] bg-white p-0.5 text-[11px] font-mono shadow-xs">
               <button
                 onClick={() => setSelectedTab('live')}
-                className={`px-2 py-0.5 rounded-[4px] transition-colors ${
-                  selectedTab === 'live' ? 'bg-[#1D2536] text-[#F4F2ED]' : 'text-[#7D8495] hover:text-[#D5DAE5]'
+                className={`px-2.5 py-1 rounded-[6px] transition-colors font-medium ${
+                  selectedTab === 'live' ? 'bg-[#121417] text-white' : 'text-[#626874] hover:text-[#121417]'
                 }`}
               >
-                {locale === 'es' ? 'Simulación en vivo' : 'Live Simulation'}
+                {locale === 'es' ? 'Simulación en vivo' : 'Live Workflow'}
               </button>
               <button
                 onClick={() => setSelectedTab('audit')}
-                className={`px-2 py-0.5 rounded-[4px] transition-colors ${
-                  selectedTab === 'audit' ? 'bg-[#1D2536] text-[#F4F2ED]' : 'text-[#7D8495] hover:text-[#D5DAE5]'
+                className={`px-2.5 py-1 rounded-[6px] transition-colors font-medium ${
+                  selectedTab === 'audit' ? 'bg-[#121417] text-white' : 'text-[#626874] hover:text-[#121417]'
                 }`}
               >
-                {locale === 'es' ? 'Auditoría' : 'Audit Log'}
+                {locale === 'es' ? 'Registro de auditoría' : 'Audit Trail'}
               </button>
             </div>
 
             <button
               onClick={() => setIsPlaying(!isPlaying)}
-              className="p-1.5 rounded-lg border border-[#222A3D] bg-[#0E121B] text-[#A0A5B5] hover:text-[#F4F2ED] transition-colors"
+              className="p-1.5 rounded-lg border border-[#e4e7ec] bg-white text-[#626874] hover:text-[#121417] hover:bg-[#f4f5f7] transition-colors"
               title={isPlaying ? 'Pause simulation' : 'Play simulation'}
             >
-              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 text-[#D6A856]" />}
+              {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 text-[#384bc7]" />}
             </button>
             <button
               onClick={handleReset}
-              className="p-1.5 rounded-lg border border-[#222A3D] bg-[#0E121B] text-[#A0A5B5] hover:text-[#F4F2ED] transition-colors"
+              className="p-1.5 rounded-lg border border-[#e4e7ec] bg-white text-[#626874] hover:text-[#121417] hover:bg-[#f4f5f7] transition-colors"
               title="Reset"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -115,12 +117,12 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
         </div>
 
         {/* Step Progression Ribbon */}
-        <div className="grid grid-cols-5 border-b border-[#181F2D] bg-[#090C12] text-xs">
+        <div className="grid grid-cols-5 border-b border-[#e4e7ec] bg-[#fcfdfe] text-xs">
           {[
-            { id: 0, label: locale === 'es' ? '1. Extraer' : '1. Classify', icon: Sparkles },
-            { id: 1, label: locale === 'es' ? '2. Vincular' : '2. Match', icon: FileText },
-            { id: 2, label: locale === 'es' ? '3. Redactar' : '3. Draft', icon: Send },
-            { id: 3, label: locale === 'es' ? '4. Reservar' : '4. Book', icon: CalendarCheck },
+            { id: 0, label: locale === 'es' ? '1. Capturar' : '1. Capture', icon: Mail },
+            { id: 1, label: locale === 'es' ? '2. Entender' : '2. Understand', icon: Sparkles },
+            { id: 2, label: locale === 'es' ? '3. Citar norma' : '3. Match', icon: FileText },
+            { id: 3, label: locale === 'es' ? '4. Redactar & Reservar' : '4. Draft & Book', icon: CalendarCheck },
             { id: 4, label: locale === 'es' ? '5. Seguimiento' : '5. Follow-up', icon: Clock },
           ].map((s) => {
             const Icon = s.icon;
@@ -133,18 +135,18 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
                   setActiveStep(s.id);
                   setIsPlaying(false);
                 }}
-                className={`flex items-center justify-center gap-1.5 py-2.5 px-2 border-r border-[#181F2D] last:border-r-0 font-mono text-[11px] transition-all ${
+                className={`flex items-center justify-center gap-1.5 py-2.5 px-2 border-r border-[#e4e7ec] last:border-r-0 font-mono text-[11px] transition-all cursor-pointer ${
                   isCurrent
-                    ? 'bg-[#151D2A] text-[#ECC67A] font-semibold border-b-2 border-b-[#D6A856]'
+                    ? 'bg-white text-[#384bc7] font-semibold border-b-2 border-b-[#384bc7] shadow-xs'
                     : isPassed
-                    ? 'text-[#48BB78] bg-[#0C1017]'
-                    : 'text-[#656C7D] hover:text-[#A0A5B5] hover:bg-[#0D1118]'
+                    ? 'text-[#0b935d] bg-[#f8fcf9]'
+                    : 'text-[#626874] hover:text-[#121417] hover:bg-[#f4f5f7]'
                 }`}
               >
                 {isPassed ? (
-                  <Check className="w-3 h-3 text-[#48BB78]" />
+                  <Check className="w-3.5 h-3.5 text-[#0b935d]" />
                 ) : (
-                  <Icon className={`w-3 h-3 ${isCurrent ? 'text-[#D6A856]' : ''}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isCurrent ? 'text-[#384bc7]' : ''}`} />
                 )}
                 <span className="truncate hidden sm:inline">{s.label}</span>
               </button>
@@ -154,84 +156,89 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
 
         {/* Dual-Pane Interface */}
         {selectedTab === 'live' ? (
-          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[420px]">
             {/* Left Pane: Inbound Customer Thread (5 cols) */}
-            <div className="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-[#1A2233] bg-[#0B0E15] p-5 flex flex-col justify-between">
+            <div className="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-[#e4e7ec] bg-[#ffffff] p-5 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between pb-3.5 border-b border-[#1A2233]">
+                <div className="flex items-center justify-between pb-3.5 border-b border-[#e4e7ec]">
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[#182030] text-[#8695B2] border border-[#243048]">
-                      Gmail / Inbound
+                    <span className="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-blue-50 text-blue-700 border border-blue-100 flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                      Gmail · Inbound
                     </span>
-                    <span className="text-[11px] text-[#636A7D] font-mono">23:42 CET</span>
+                    <span className="text-[11px] text-[#626874] font-mono">23:40 CET</span>
                   </div>
-                  <span className="flex items-center gap-1 text-[11px] text-[#D6A856]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#D6A856] animate-pulse" />
+                  <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#0b935d] bg-[#ddf9e4] px-2 py-0.5 rounded-full border border-[#c7f4d3]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#0b935d] animate-pulse" />
                     Live
                   </span>
                 </div>
 
                 {/* Customer Card */}
                 <div className="mt-4 flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#232D42] to-[#121622] border border-[#313E5C] flex items-center justify-center font-medium text-xs text-[#F4F2ED] shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-[#f4f5f7] border border-[#e4e7ec] flex items-center justify-center font-medium text-xs text-[#121417] shrink-0 shadow-xs">
                     SM
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-[#F4F2ED]">Sofia Marín</span>
-                      <span className="text-[11px] text-[#82899C]">sofia@brightlabs.io</span>
+                      <span className="text-sm font-semibold text-[#121417]">Sofia Marín</span>
+                      <span className="text-[11px] text-[#626874]">sofia@brightlabs.io</span>
                     </div>
-                    <div className="flex items-center gap-1.5 text-xs text-[#D6A856] font-medium mt-0.5">
-                      <Building2 className="w-3 h-3 text-[#D6A856]" />
+                    <div className="flex items-center gap-1.5 text-xs text-[#626874] font-medium mt-0.5">
+                      <Building2 className="w-3 h-3 text-[#384bc7]" />
                       BrightLabs Corporate
                     </div>
                   </div>
                 </div>
 
                 {/* Email Body */}
-                <div className="mt-4 p-4 rounded-xl bg-[#0F1420] border border-[#1E2638] text-[13px] leading-relaxed text-[#D2D6E2] relative">
-                  <div className="text-[11px] font-mono text-[#6A7387] mb-1.5">
-                    Subject: Private dining inquiry for 24 guests (Dec 12)
+                <div className="mt-4 p-4 rounded-xl bg-[#f8f9fb] border border-[#e4e7ec] text-[13px] leading-relaxed text-[#121417]">
+                  <div className="text-[11px] font-mono text-[#626874] mb-1.5">
+                    Subject: Private dinner inquiry for 24 guests (Dec 12)
                   </div>
-                  <p>{t.demoInboundMessage}</p>
+                  <p className="font-normal text-muted-foreground">
+                    “{locale === 'es' 
+                      ? '¡Hola! Nos gustaría organizar una cena privada para 24 personas el 12 de diciembre. ¿Tienen espacio y menú vegetariano disponible?' 
+                      : 'Hi! We’d love a private dinner for 24 on Dec 12 — do you have space and is there a vegetarian tasting menu available?'}”
+                  </p>
                 </div>
 
                 {/* Metadata Pill Grid */}
                 <div className="mt-4 grid grid-cols-2 gap-2 text-[11px] font-mono">
-                  <div className="p-2 rounded-lg bg-[#0F131D] border border-[#1B2232] text-[#868D9E]">
-                    <span className="text-[#565C6D] block">PARTY SIZE:</span>
-                    <span className="text-[#F4F2ED] font-medium">24 Guests</span>
+                  <div className="p-2.5 rounded-lg bg-[#f8f9fb] border border-[#e4e7ec]">
+                    <span className="text-[#626874] block text-[10px] uppercase">Party Size</span>
+                    <span className="text-[#121417] font-semibold">24 Guests</span>
                   </div>
-                  <div className="p-2 rounded-lg bg-[#0F131D] border border-[#1B2232] text-[#868D9E]">
-                    <span className="text-[#565C6D] block">REQUESTED DATE:</span>
-                    <span className="text-[#F4F2ED] font-medium">12 Dec 2026</span>
+                  <div className="p-2.5 rounded-lg bg-[#f8f9fb] border border-[#e4e7ec]">
+                    <span className="text-[#626874] block text-[10px] uppercase">Requested Date</span>
+                    <span className="text-[#121417] font-semibold">12 Dec 2026</span>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-[#161D2C] flex items-center justify-between text-[11px] text-[#636B7E] font-mono">
-                <span>Thread ID: #774-BRIGHT</span>
-                <span className="text-[#10B981] flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#10B981]" />
+              <div className="mt-5 pt-3 border-t border-[#e4e7ec] flex items-center justify-between text-[11px] text-[#626874] font-mono">
+                <span>Thread #774-BRIGHT</span>
+                <span className="text-[#0b935d] flex items-center gap-1 font-medium">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#0b935d]" />
                   Verified Sender
                 </span>
               </div>
             </div>
 
             {/* Right Pane: Maxander AI Engine Workspace (7 cols) */}
-            <div className="lg:col-span-7 bg-[#090C12] p-5 flex flex-col justify-between">
-              <div className="space-y-4">
+            <div className="lg:col-span-7 bg-[#fafbfc] p-5 flex flex-col justify-between">
+              <div className="space-y-3.5">
                 {/* Engine Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-[#182030]">
+                <div className="flex items-center justify-between pb-3 border-b border-[#e4e7ec]">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-md bg-[#D6A856]/15 border border-[#D6A856]/40 flex items-center justify-center">
-                      <Sparkles className="w-3.5 h-3.5 text-[#ECC67A]" />
+                    <div className="w-6 h-6 rounded-md bg-[#384bc7] flex items-center justify-center text-white">
+                      <Sparkles className="w-3.5 h-3.5" />
                     </div>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-[#F4F2ED]">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[#121417]">
                       Maxander Co-Pilot Engine
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-[#D6A856] bg-[#D6A856]/10 px-2 py-0.5 rounded border border-[#D6A856]/20">
+                  <span className="text-[11px] font-mono text-[#384bc7] bg-[#eef2ff] px-2.5 py-0.5 rounded-md border border-[#c7d2fe] font-medium">
                     {locale === 'es' ? 'Precisión 99.8%' : 'Accuracy: 99.8%'}
                   </span>
                 </div>
@@ -240,19 +247,19 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
                 <div
                   className={`p-3.5 rounded-xl border transition-all duration-300 ${
                     activeStep >= 0
-                      ? 'bg-[#0E131E] border-[#253046] shadow-xs'
-                      : 'bg-[#0A0D14] border-[#151B28] opacity-40'
+                      ? 'bg-white border-[#e4e7ec] shadow-xs'
+                      : 'bg-white/40 border-[#e4e7ec]/60 opacity-40'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-mono font-medium text-[#ECC67A] flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" />
+                    <span className="text-xs font-mono font-medium text-[#121417] flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#0b935d]" />
                       {t.stepClassify}
                     </span>
-                    <span className="text-[10px] font-mono text-[#6A7387]">NLP Parser v4.2</span>
+                    <span className="text-[10px] font-mono text-[#626874]">NLP Intent Extractor</span>
                   </div>
-                  <div className="text-xs text-[#A8AFC0] font-mono bg-[#090C12] p-2 rounded-lg border border-[#192131]">
-                    {t.stepClassifyDetail}
+                  <div className="text-xs text-[#626874] font-mono bg-[#f8f9fb] p-2 rounded-lg border border-[#e4e7ec]">
+                    Intent: <strong className="text-[#121417]">Private Dining</strong> · Party: <strong className="text-[#121417]">24 pax</strong> · Date: <strong className="text-[#121417]">12 Dec</strong> · Diet: <strong className="text-[#121417]">Vegetarian</strong>
                   </div>
                 </div>
 
@@ -260,46 +267,49 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
                 <div
                   className={`p-3.5 rounded-xl border transition-all duration-300 ${
                     activeStep >= 1
-                      ? 'bg-[#0E131E] border-[#253046] shadow-xs'
-                      : 'bg-[#0A0D14] border-[#151B28] opacity-40'
+                      ? 'bg-white border-[#e4e7ec] shadow-xs'
+                      : 'bg-white/40 border-[#e4e7ec]/60 opacity-40'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-mono font-medium text-[#7AA2F7] flex items-center gap-1.5">
-                      <FileText className="w-3.5 h-3.5 text-[#7AA2F7]" />
+                    <span className="text-xs font-mono font-medium text-[#384bc7] flex items-center gap-1.5">
+                      <FileText className="w-3.5 h-3.5 text-[#384bc7]" />
                       {t.stepKnowledge}
                     </span>
                     <button
                       onClick={onOpenKnowledgeModal}
-                      className="text-[10px] font-mono text-[#D6A856] hover:underline cursor-pointer"
+                      className="text-[10px] font-mono text-[#384bc7] hover:underline cursor-pointer font-medium"
                     >
                       {locale === 'es' ? 'Ver norma' : 'Inspect citation'} →
                     </button>
                   </div>
-                  <div className="text-xs text-[#A8AFC0] leading-relaxed bg-[#090C12] p-2 rounded-lg border border-[#192131]">
-                    {t.stepKnowledgeDetail}
+                  <div className="text-xs text-[#626874] leading-relaxed bg-[#f8f9fb] p-2 rounded-lg border border-[#e4e7ec]">
+                    “The Garden Room seats up to 28 for private dinners. Vegetarian tasting menu available at €58 per person.”
+                    <div className="mt-1 text-[10px] text-[#384bc7] font-mono font-medium">
+                      From: Events FAQ v4 · learned from 212 sent threads
+                    </div>
                   </div>
                 </div>
 
-                {/* Stage 3: Draft Reply & Restoo Hold */}
+                {/* Stage 3: Draft Reply & Restoo Booking */}
                 <div
                   className={`p-3.5 rounded-xl border transition-all duration-300 ${
                     activeStep >= 2
-                      ? 'bg-[#0E131E] border-[#253046] shadow-xs'
-                      : 'bg-[#0A0D14] border-[#151B28] opacity-40'
+                      ? 'bg-white border-[#e4e7ec] shadow-xs'
+                      : 'bg-white/40 border-[#e4e7ec]/60 opacity-40'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-mono font-medium text-[#F4F2ED] flex items-center gap-1.5">
-                      <Send className="w-3.5 h-3.5 text-[#ECC67A]" />
+                    <span className="text-xs font-mono font-medium text-[#121417] flex items-center gap-1.5">
+                      <Send className="w-3.5 h-3.5 text-[#384bc7]" />
                       {t.stepDraft}
                     </span>
-                    <span className="text-[10px] font-mono text-[#10B981] bg-[#10B981]/10 px-1.5 py-0.5 rounded">
-                      + Autumn_Tasting.pdf
+                    <span className="text-[10px] font-mono text-rose-600 bg-rose-50 border border-rose-100 px-1.5 py-0.5 rounded font-medium">
+                      + GardenRoom_Events.pdf
                     </span>
                   </div>
-                  <div className="text-xs text-[#CCD1DF] italic bg-[#090C12] p-2.5 rounded-lg border border-[#192131] leading-relaxed">
-                    {t.stepDraftDetail}
+                  <div className="text-xs text-[#121417] bg-[#f8f9fb] p-2.5 rounded-lg border border-[#e4e7ec] leading-relaxed">
+                    “Hi Sofia — we’d love to host you. The Garden Room accommodates 24 comfortably, and our vegetarian tasting menu is €58 per person…”
                   </div>
                 </div>
 
@@ -308,46 +318,46 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
                   <div
                     className={`p-2.5 rounded-xl border text-xs transition-all ${
                       activeStep >= 3
-                        ? 'bg-[#0E131E] border-[#253046]'
-                        : 'bg-[#0A0D14] border-[#151B28] opacity-40'
+                        ? 'bg-white border-[#e4e7ec] shadow-xs'
+                        : 'bg-white/40 border-[#e4e7ec]/60 opacity-40'
                     }`}
                   >
-                    <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#10B981] font-medium">
-                      <CalendarCheck className="w-3.5 h-3.5" />
+                    <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#0b935d] font-semibold">
+                      <CalendarCheck className="w-3.5 h-3.5 text-[#0b935d]" />
                       {t.stepBooking}
                     </div>
-                    <p className="text-[11px] text-[#868D9E] mt-1 font-mono">
-                      {t.stepBookingDetail}
+                    <p className="text-[11px] text-[#626874] mt-1 font-mono">
+                      Restoo hold · Garden Room · deposit link included
                     </p>
                   </div>
 
                   <div
                     className={`p-2.5 rounded-xl border text-xs transition-all ${
                       activeStep >= 4
-                        ? 'bg-[#0E131E] border-[#253046]'
-                        : 'bg-[#0A0D14] border-[#151B28] opacity-40'
+                        ? 'bg-white border-[#e4e7ec] shadow-xs'
+                        : 'bg-white/40 border-[#e4e7ec]/60 opacity-40'
                     }`}
                   >
-                    <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#ECC67A] font-medium">
-                      <Clock className="w-3.5 h-3.5" />
+                    <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#384bc7] font-semibold">
+                      <Clock className="w-3.5 h-3.5 text-[#384bc7]" />
                       {t.stepFollowup}
                     </div>
-                    <p className="text-[11px] text-[#868D9E] mt-1 font-mono">
-                      {t.stepFollowupDetail}
+                    <p className="text-[11px] text-[#626874] mt-1 font-mono">
+                      Scheduled for day 30 · auto-send ready
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Bottom Interactive Action Bar */}
-              <div className="mt-5 pt-4 border-t border-[#182030] flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="mt-4 pt-3.5 border-t border-[#e4e7ec] flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <span
                     className={`w-2 h-2 rounded-full ${
-                      isApproved ? 'bg-[#10B981]' : 'bg-[#D6A856] animate-ping'
+                      isApproved ? 'bg-[#0b935d]' : 'bg-[#384bc7] animate-ping'
                     }`}
                   />
-                  <span className="text-xs font-mono text-[#98A0B2]">
+                  <span className="text-xs font-mono text-[#626874]">
                     {isApproved ? t.statusApproved : t.statusAwaiting}
                   </span>
                 </div>
@@ -356,17 +366,17 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
                   {!isApproved ? (
                     <button
                       onClick={handleApprove}
-                      className="w-full sm:w-auto px-4 py-2 rounded-lg text-xs font-semibold bg-[#10B981] text-[#07080B] hover:bg-[#34D399] transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)] active:scale-95"
+                      className="w-full sm:w-auto px-4 py-2 rounded-[10px] text-xs font-semibold bg-[#121417] text-white hover:bg-[#121417]/90 transition-all flex items-center justify-center gap-1.5 shadow-xs active:scale-95 cursor-pointer"
                     >
-                      <Check className="w-3.5 h-3.5" />
+                      <Check className="w-3.5 h-3.5 text-[#0b935d]" />
                       {t.buttonApprove}
                     </button>
                   ) : (
                     <button
                       onClick={handleReset}
-                      className="w-full sm:w-auto px-3.5 py-1.5 rounded-lg text-xs font-mono text-[#D6A856] border border-[#D6A856]/40 bg-[#D6A856]/10 hover:bg-[#D6A856]/20 transition-all flex items-center justify-center gap-1.5"
+                      className="w-full sm:w-auto px-3.5 py-1.5 rounded-[10px] text-xs font-mono text-[#121417] border border-[#e4e7ec] bg-white hover:bg-[#f4f5f7] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                     >
-                      <RotateCcw className="w-3 h-3" />
+                      <RotateCcw className="w-3 h-3 text-[#626874]" />
                       {t.buttonReset}
                     </button>
                   )}
@@ -376,26 +386,26 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
           </div>
         ) : (
           /* Audit Log Tab View */
-          <div className="p-6 bg-[#090C12] text-xs font-mono text-[#A0A5B5] space-y-3 min-h-[380px]">
-            <div className="flex items-center justify-between pb-3 border-b border-[#182030]">
-              <span className="text-[#F4F2ED] font-semibold">MAXANDER AUDIT TRAIL // RECORD #99281-ELF</span>
-              <span className="text-[#10B981]">IMMUTABLE LOG · EU GDPR COMPLIANT</span>
+          <div className="p-6 bg-white text-xs font-mono text-[#626874] space-y-3 min-h-[420px]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#e4e7ec]">
+              <span className="text-[#121417] font-semibold">MAXANDER AUDIT TRAIL // RECORD #99281-ELF</span>
+              <span className="text-[#0b935d] font-medium">IMMUTABLE LOG · EU GDPR COMPLIANT</span>
             </div>
-            <div className="space-y-2 text-[11px] leading-relaxed">
-              <p className="text-[#656C7D]">
-                [2026-12-01 23:40:12 UTC] Inbound email ingested from Gmail API (oauth: bookings@elforo.com)
+            <div className="space-y-2.5 text-[12px] leading-relaxed">
+              <p className="p-2 rounded bg-[#f8f9fb] border border-[#e4e7ec]">
+                <strong className="text-[#121417]">[23:40:12 UTC]</strong> Inbound inquiry received from Gmail API (oauth: bookings@elforo.com)
               </p>
-              <p className="text-[#7AA2F7]">
-                [2026-12-01 23:40:13 UTC] Extraction confidence: intent=private_dining (0.998), date=2026-12-12 (1.00), party=24 (1.00)
+              <p className="p-2 rounded bg-[#f8f9fb] border border-[#e4e7ec]">
+                <strong className="text-[#384bc7]">[23:40:13 UTC]</strong> NLP classification: intent=private_dining (0.998), date=2026-12-12 (1.00), party=24 (1.00)
               </p>
-              <p className="text-[#ECC67A]">
-                [2026-12-01 23:40:14 UTC] Grounded match: Document 'Events FAQ Autumn 2026.pdf' (Sections: 2, 4) - cited in drafted response
+              <p className="p-2 rounded bg-[#f8f9fb] border border-[#e4e7ec]">
+                <strong className="text-[#384bc7]">[23:40:14 UTC]</strong> Knowledge match: Document 'Events FAQ Autumn 2026.pdf' (Sections: 2, 4) cited in response
               </p>
-              <p className="text-[#D6A856]">
-                [2026-12-01 23:40:15 UTC] Restoo hold created: ID #84920 (Garden Room, Dec 12 20:30, 24 pax, deposit link generated)
+              <p className="p-2 rounded bg-[#f8f9fb] border border-[#e4e7ec]">
+                <strong className="text-[#0b935d]">[23:40:15 UTC]</strong> Restoo hold created: ID #84920 (Garden Room, Dec 12 20:30, 24 pax, deposit link generated)
               </p>
-              <p className="text-[#10B981]">
-                [2026-12-01 23:40:15 UTC] Thread queued for operator review (Autonomy mode: Level 2 Drafts)
+              <p className="p-2 rounded bg-[#f8f9fb] border border-[#e4e7ec]">
+                <strong className="text-[#121417]">[23:40:15 UTC]</strong> Thread queued for operator 1-click approval (Autonomy Stage: Level 2 Drafts)
               </p>
             </div>
           </div>
@@ -404,3 +414,4 @@ export const HeroProductVisual: React.FC<HeroProductVisualProps> = ({ locale, on
     </div>
   );
 };
+

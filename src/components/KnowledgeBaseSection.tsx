@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Database, RefreshCw, CheckCircle2, ChevronRight, Eye } from 'lucide-react';
+import { FileText, Database, RefreshCw, CheckCircle2, ChevronRight } from 'lucide-react';
 import { Locale, translations } from '../data/translations';
 
 interface KnowledgeBaseSectionProps {
@@ -11,17 +11,17 @@ export const KnowledgeBaseSection: React.FC<KnowledgeBaseSectionProps> = ({ loca
   const [selectedDocIndex, setSelectedDocIndex] = useState<number>(0);
 
   return (
-    <section className="py-20 sm:py-28 border-b border-[#161D2B] bg-[#07090E]">
+    <section className="py-20 sm:py-28 border-b border-[#E4E7EC] bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#222B3D] bg-[#0E131E] text-xs font-mono text-[#D6A856] mb-4">
-            <Database className="w-3 h-3" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#E4E7EC] bg-[#F9FAFB] text-xs font-mono text-[#384BC7] mb-4">
+            <Database className="w-3.5 h-3.5" />
             <span>{locale === 'es' ? 'BASE DE CONOCIMIENTO EMBEBIDA' : 'EMBEDDED KNOWLEDGE BASE'}</span>
           </div>
-          <h2 className="headline text-3xl sm:text-4xl lg:text-5xl text-[#F4F2ED]">
+          <h2 className="headline text-3xl sm:text-4xl lg:text-5xl text-[#121417]">
             {t.title}
           </h2>
-          <p className="mt-3 text-base text-[#8F96A8]">
+          <p className="mt-3 text-base text-[#475467]">
             {t.subtitle}
           </p>
         </div>
@@ -39,14 +39,14 @@ export const KnowledgeBaseSection: React.FC<KnowledgeBaseSectionProps> = ({ loca
                   onClick={() => setSelectedDocIndex(idx)}
                   className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between ${
                     isSelected
-                      ? 'bg-[#111724] border-[#D6A856]/50 shadow-lg'
-                      : 'bg-[#0A0D15] border-[#182030] hover:border-[#26334A] hover:bg-[#0D111A]'
+                      ? 'bg-[#F9FAFB] border-[#384BC7] shadow-sm ring-1 ring-[#384BC7]/20'
+                      : 'bg-white border-[#E4E7EC] hover:border-[#CBD5E1] hover:bg-[#FAFAFA]'
                   }`}
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
                     <div
                       className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
-                        isSelected ? 'bg-[#D6A856]/20 text-[#ECC67A]' : 'bg-[#141A27] text-[#697285]'
+                        isSelected ? 'bg-[#384BC7]/10 text-[#384BC7]' : 'bg-[#F2F4F7] text-[#667085]'
                       }`}
                     >
                       <FileText className="w-5 h-5" />
@@ -54,14 +54,14 @@ export const KnowledgeBaseSection: React.FC<KnowledgeBaseSectionProps> = ({ loca
 
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-[#F4F2ED] truncate">
+                        <span className="text-sm font-semibold text-[#121417] truncate">
                           {doc.name}
                         </span>
-                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#182030] text-[#8695B2]">
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#F2F4F7] text-[#475467]">
                           {doc.type}
                         </span>
                       </div>
-                      <p className="text-xs font-mono text-[#7A8398] mt-1">
+                      <p className="text-xs font-mono text-[#667085] mt-1">
                         {doc.meta}
                       </p>
                     </div>
@@ -69,7 +69,7 @@ export const KnowledgeBaseSection: React.FC<KnowledgeBaseSectionProps> = ({ loca
 
                   <ChevronRight
                     className={`w-4 h-4 shrink-0 transition-transform ${
-                      isSelected ? 'text-[#ECC67A] translate-x-1' : 'text-[#444C60]'
+                      isSelected ? 'text-[#384BC7] translate-x-1' : 'text-[#98A2B3]'
                     }`}
                   />
                 </div>
@@ -77,26 +77,26 @@ export const KnowledgeBaseSection: React.FC<KnowledgeBaseSectionProps> = ({ loca
             })}
 
             {/* Bottom Status Ribbon */}
-            <div className="p-4 rounded-xl border border-dashed border-[#1E2638] bg-[#0A0D14] flex items-center justify-between text-xs font-mono text-[#7E879B]">
+            <div className="p-4 rounded-xl border border-dashed border-[#E4E7EC] bg-[#F9FAFB] flex items-center justify-between text-xs font-mono text-[#475467]">
               <span className="flex items-center gap-2">
-                <RefreshCw className="w-3.5 h-3.5 text-[#10B981] animate-spin-slow" />
+                <RefreshCw className="w-3.5 h-3.5 text-[#0B935D] animate-spin-slow" />
                 {locale === 'es' ? 'Sincronizado cada noche a las 04:00 CET' : 'Nightly sync active at 04:00 CET'}
               </span>
-              <span className="text-[#10B981]">100% Ready</span>
+              <span className="text-[#0B935D] font-semibold">100% Ready</span>
             </div>
           </div>
 
           {/* Right Column: Document Details & Indexed Chunks (6 cols) */}
           <div className="lg:col-span-6">
-            <div className="rounded-2xl border border-[#20293D] bg-[#0B0E16] p-6 sm:p-7 shadow-xl">
-              <div className="flex items-center justify-between pb-4 border-b border-[#1A2234]">
+            <div className="rounded-2xl border border-[#E4E7EC] bg-white p-6 sm:p-7 shadow-sm">
+              <div className="flex items-center justify-between pb-4 border-b border-[#F2F4F7]">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#D6A856]" />
-                  <span className="font-mono text-xs text-[#F4F2ED] font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-[#384BC7]" />
+                  <span className="font-mono text-xs text-[#121417] font-semibold">
                     {t.docs[selectedDocIndex].name}
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-[#10B981] bg-[#10B981]/10 px-2 py-0.5 rounded border border-[#10B981]/20">
+                <span className="text-[10px] font-mono text-[#0B935D] bg-[#0B935D]/10 px-2 py-0.5 rounded border border-[#0B935D]/20">
                   {locale === 'es' ? 'Indexado' : 'Indexed & Active'}
                 </span>
               </div>
@@ -104,26 +104,26 @@ export const KnowledgeBaseSection: React.FC<KnowledgeBaseSectionProps> = ({ loca
               {/* Document Preview Snippet */}
               <div className="mt-5 space-y-4">
                 <div>
-                  <div className="text-[11px] font-mono text-[#656E82] uppercase tracking-wider mb-1.5">
+                  <div className="text-[11px] font-mono text-[#667085] uppercase tracking-wider mb-1.5">
                     {locale === 'es' ? 'Extracto verificado:' : 'Ground Truth Snippet:'}
                   </div>
-                  <div className="p-4 rounded-xl bg-[#07090E] border border-[#182030] text-xs text-[#CCD2E2] font-mono leading-relaxed">
+                  <div className="p-4 rounded-xl bg-[#F9FAFB] border border-[#E4E7EC] text-xs text-[#344054] font-mono leading-relaxed">
                     “{t.docs[selectedDocIndex].preview}”
                   </div>
                 </div>
 
                 {/* Indexed Sections Pill Grid */}
                 <div>
-                  <div className="text-[11px] font-mono text-[#656E82] uppercase tracking-wider mb-2">
+                  <div className="text-[11px] font-mono text-[#667085] uppercase tracking-wider mb-2">
                     {locale === 'es' ? 'Secciones y cláusulas indexadas:' : 'Indexed Clauses & Entities:'}
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                     {t.docs[selectedDocIndex].sections.map((sec, i) => (
                       <div
                         key={i}
-                        className="p-2.5 rounded-lg bg-[#0E121B] border border-[#1B2232] text-[#A6ADC0] flex items-center gap-2"
+                        className="p-2.5 rounded-lg bg-[#FAFAFA] border border-[#E4E7EC] text-[#344054] flex items-center gap-2"
                       >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981] shrink-0" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#0B935D] shrink-0" />
                         <span className="truncate">{sec}</span>
                       </div>
                     ))}
@@ -132,7 +132,7 @@ export const KnowledgeBaseSection: React.FC<KnowledgeBaseSectionProps> = ({ loca
               </div>
 
               {/* Footer Note */}
-              <div className="mt-6 pt-4 border-t border-[#182030] text-xs font-mono text-[#8C94A7] flex items-center justify-between">
+              <div className="mt-6 pt-4 border-t border-[#F2F4F7] text-xs font-mono text-[#667085] flex items-center justify-between">
                 <span>{t.footerText}</span>
               </div>
             </div>

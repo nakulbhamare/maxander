@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, Mail, MessageSquare, Calendar, Sparkles, FileText, CalendarCheck, ArrowRight } from 'lucide-react';
+import { Mail, Calendar, MessageSquare, Sparkles, Check, ArrowRight, FileText, CalendarCheck } from 'lucide-react';
 import { Locale, translations } from '../data/translations';
 
 interface OneFunnelSectionProps {
@@ -14,44 +14,35 @@ export const OneFunnelSection: React.FC<OneFunnelSectionProps> = ({ locale, onOp
   const channelData = {
     gmail: {
       source: 'Gmail',
-      sender: 'sofia@brightlabs.io',
-      time: '23:40 CET',
-      message: locale === 'es'
-        ? '«¡Hola! Nos gustaría una cena privada para 24 el 12 de diciembre. ¿Tenéis espacio?»'
-        : '“Hi! We\'d love a private dinner for 24 on Dec 12 — do you have space?”',
+      icon: Mail,
+      color: '#EA4335',
+      message: locale === 'es' ? '«¿Tienen mesa privada para 24 personas el 12 de diciembre?»' : '“Do you have private dining availability for 24 people on Dec 12?”',
       extracted: {
-        intent: locale === 'es' ? 'Cena privada' : 'Private dinner',
-        party: '24 guests',
-        date: '12 Dec 2026',
-        budget: '€58/pp tasting'
+        intent: locale === 'es' ? 'Cena privada' : 'Private dining',
+        party: '24 pax',
+        date: 'Dec 12 · 20:30'
       }
     },
     whatsapp: {
       source: 'WhatsApp',
-      sender: '+34 612 948 201',
-      time: '23:44 CET',
-      message: locale === 'es'
-        ? '«Buenas noches, ¿mesa para 8 personas este viernes a las 21:30 para celebrar un cumpleaños?»'
-        : '“Good evening, table for 8 this Friday at 21:30 to celebrate a birthday?”',
+      icon: MessageSquare,
+      color: '#25D366',
+      message: locale === 'es' ? '«Hola! Somos 6 para comer este sábado, ¿tenéis terraza?»' : '“Hi! 6 of us for lunch this Saturday, is terrace available?”',
       extracted: {
-        intent: locale === 'es' ? 'Celebración cumpleaños' : 'Birthday celebration',
-        party: '8 guests',
-        date: 'This Friday 21:30',
-        budget: 'À la carte'
+        intent: locale === 'es' ? 'Reserva terraza' : 'Terrace booking',
+        party: '6 pax',
+        date: 'This Sat · 14:00'
       }
     },
     thefork: {
-      source: 'TheFork Widget',
-      sender: 'Guest Inquiry #4928',
-      time: '23:51 CET',
-      message: locale === 'es'
-        ? '«Solicitud de reserva de grupo: 16 personas para almuerzo de empresa con menú maridado.»'
-        : '“Group booking inquiry: 16 guests for corporate lunch with wine pairing.”',
+      source: 'TheFork API',
+      icon: Calendar,
+      color: '#00857A',
+      message: locale === 'es' ? '«Consulta de evento corporativo con maridaje y menú cerrado»' : '“Corporate group inquiry with pairing and set tasting menu”',
       extracted: {
-        intent: locale === 'es' ? 'Almuerzo corporativo' : 'Corporate lunch',
-        party: '16 guests',
-        date: '18 Dec 14:00',
-        budget: 'Tasting + Pairings'
+        intent: locale === 'es' ? 'Evento corporativo' : 'Corporate event',
+        party: '18 pax',
+        date: 'Dec 18 · 21:00'
       }
     }
   };
@@ -59,39 +50,39 @@ export const OneFunnelSection: React.FC<OneFunnelSectionProps> = ({ locale, onOp
   const activeData = channelData[selectedChannel];
 
   return (
-    <section id="product" className="py-24 sm:py-32 border-b border-[#161D2B] bg-[#080A0F] fine-grid">
+    <section id="product" className="py-20 sm:py-28 border-b border-dashed border-[#e4e7ec] bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex items-baseline justify-between gap-4 border-b border-dashed border-[#1E2638] pb-4 mb-12">
+        <div className="flex items-baseline justify-between gap-4 border-b border-dashed border-[#e4e7ec] pb-3 mb-12">
           <span className="label-mono">
-            <span className="text-[#D6A856] font-semibold">{t.tag}</span>
+            <span className="text-[#626874]/50">[01]</span> One funnel
           </span>
-          <span className="label-mono hidden sm:block text-[#697285]">{t.subtitle}</span>
+          <span className="label-mono hidden sm:block text-[#626874]">/ Every channel</span>
         </div>
 
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Editorial Copy */}
           <div className="lg:col-span-5 space-y-6">
-            <h2 className="headline text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.1] text-[#F4F2ED]">
+            <h2 className="headline text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.1] text-[#121417]">
               {t.title}{' '}
               <span className="headline-quiet block sm:inline">
                 {t.titleQuiet}
               </span>
             </h2>
 
-            <p className="text-base text-[#989FB2] leading-relaxed">
+            <p className="text-base text-[#626874] leading-relaxed">
               {t.description}
             </p>
 
             {/* Checklist */}
-            <ul className="space-y-3 pt-2 text-sm text-[#CCD1E0]">
+            <ul className="space-y-3 pt-2 text-sm text-[#121417]">
               {t.bullets.map((bullet, idx) => (
-                <li key={idx} className="flex items-start gap-3">
-                  <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#10B981]/15 text-[#10B981] border border-[#10B981]/30">
-                    <Check className="w-3 h-3" />
+                <li key={idx} className="flex items-start gap-2.5">
+                  <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#ddf9e4]">
+                    <Check className="h-3 w-3 text-[#0b935d]" />
                   </span>
-                  <span>{bullet}</span>
+                  <span className="text-[#626874]">{bullet}</span>
                 </li>
               ))}
             </ul>
@@ -99,7 +90,7 @@ export const OneFunnelSection: React.FC<OneFunnelSectionProps> = ({ locale, onOp
             <div className="pt-4">
               <button
                 onClick={onOpenDemo}
-                className="group inline-flex items-center gap-2 text-sm font-medium text-[#D6A856] hover:text-[#ECC67A] transition-colors"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-[#121417] hover:text-[#384bc7] transition-colors cursor-pointer"
               >
                 <span>{t.cta}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -111,17 +102,17 @@ export const OneFunnelSection: React.FC<OneFunnelSectionProps> = ({ locale, onOp
           <div className="lg:col-span-7">
             {/* Channel Tabs */}
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-xs font-mono text-[#6A7387] mr-1">
+              <span className="text-xs font-mono text-[#626874] mr-1">
                 {locale === 'es' ? 'Simular canal:' : 'Simulate channel:'}
               </span>
               {(['gmail', 'whatsapp', 'thefork'] as const).map((ch) => (
                 <button
                   key={ch}
                   onClick={() => setSelectedChannel(ch)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
+                  className={`px-3 py-1 rounded-[8px] text-xs font-mono transition-all cursor-pointer ${
                     selectedChannel === ch
-                      ? 'bg-[#1D2536] text-[#ECC67A] border border-[#D6A856]/40 font-semibold'
-                      : 'bg-[#0E121B] text-[#7C8395] border border-[#1C2333] hover:text-[#CCD1DF]'
+                      ? 'bg-[#121417] text-white font-semibold shadow-xs'
+                      : 'bg-white text-[#626874] border border-[#e4e7ec] hover:bg-[#f4f5f7] hover:text-[#121417]'
                   }`}
                 >
                   {ch === 'gmail' && 'Gmail'}
@@ -131,91 +122,95 @@ export const OneFunnelSection: React.FC<OneFunnelSectionProps> = ({ locale, onOp
               ))}
             </div>
 
-            <div className="relative rounded-2xl border border-[#1F2739] bg-[#0B0E15] p-6 sm:p-8 shadow-2xl overflow-hidden">
-              <div className="dot-grid absolute inset-0 opacity-40 pointer-events-none" />
+            <div className="relative rounded-2xl border border-[#e4e7ec] bg-white p-6 sm:p-8 shadow-[0_1px_3px_rgba(16,24,40,0.05)] overflow-hidden">
+              <div className="dot-grid absolute inset-0 opacity-50 pointer-events-none" />
+              <div aria-hidden="true" className="hatch absolute inset-y-0 left-0 hidden w-7 border-r border-dashed border-[#e4e7ec] sm:block" />
+              <div aria-hidden="true" className="hatch absolute inset-y-0 right-0 hidden w-7 border-l border-dashed border-[#e4e7ec] sm:block" />
 
-              <div className="relative max-w-[460px] mx-auto space-y-4">
+              <div className="relative max-w-[420px] mx-auto space-y-4">
                 {/* Node 1: Inbound Message */}
-                <div className="rounded-xl border border-[#242F46] bg-[#0F1420] p-4 shadow-sm">
-                  <div className="flex items-center justify-between pb-2 border-b border-[#1D263A] text-xs">
-                    <div className="flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-md bg-[#3B82F6]/15 text-[#60A5FA] flex items-center justify-center">
-                        {selectedChannel === 'gmail' && <Mail className="w-3.5 h-3.5" />}
-                        {selectedChannel === 'whatsapp' && <MessageSquare className="w-3.5 h-3.5" />}
-                        {selectedChannel === 'thefork' && <Calendar className="w-3.5 h-3.5" />}
-                      </span>
-                      <span className="font-semibold text-[#F4F2ED]">{t.inboundLabel}</span>
-                    </div>
-                    <span className="px-2 py-0.5 rounded font-mono text-[10px] bg-[#1A2234] text-[#8695B2]">
+                <div className="relative rounded-xl border border-[#e4e7ec] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]">
+                  <div className="flex items-center gap-2 px-3 py-2.5">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-600">
+                      {selectedChannel === 'gmail' && <Mail className="h-3.5 w-3.5" />}
+                      {selectedChannel === 'whatsapp' && <MessageSquare className="h-3.5 w-3.5" />}
+                      {selectedChannel === 'thefork' && <Calendar className="h-3.5 w-3.5" />}
+                    </span>
+                    <span className="truncate text-[13px] font-medium text-[#121417]">{t.inboundLabel}</span>
+                    <span className="ml-auto shrink-0 rounded-md border border-[#e4e7ec] bg-white px-1.5 py-0.5 text-[11px] text-[#626874]">
                       {activeData.source}
                     </span>
                   </div>
-                  <p className="text-xs text-[#CCD2E2] mt-2.5 italic">
+                  <div className="border-t border-[#e4e7ec] px-3 py-2 text-left text-xs leading-relaxed text-[#626874]">
                     {activeData.message}
-                  </p>
+                  </div>
                 </div>
 
                 {/* Flow Connector Line */}
-                <div className="flex justify-center my-1">
-                  <div className="w-px h-6 bg-gradient-to-b from-[#3B82F6] to-[#D6A856]" />
+                <div className="relative mx-auto w-px h-8">
+                  <div className="absolute inset-0 bg-[#e4e7ec]" />
+                  <div className="absolute inset-0 bg-[#0b935d]/60 animate-pulse" />
+                  <span className="absolute -bottom-[3px] left-1/2 block h-[7px] w-[7px] -translate-x-1/2 rounded-full border border-[#e4e7ec] bg-white" />
                 </div>
 
                 {/* Node 2: Classify & Extract */}
-                <div className="rounded-xl border border-[#2B354C] bg-[#111624] p-4 shadow-sm">
-                  <div className="flex items-center justify-between pb-2 border-b border-[#20293E] text-xs">
-                    <div className="flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-md bg-[#8B5CF6]/15 text-[#A78BFA] flex items-center justify-center">
-                        <Sparkles className="w-3.5 h-3.5" />
-                      </span>
-                      <span className="font-semibold text-[#F4F2ED]">{t.classifyLabel}</span>
-                    </div>
-                    <span className="px-2 py-0.5 rounded font-mono text-[10px] bg-[#D6A856]/15 text-[#ECC67A]">
+                <div className="relative rounded-xl border border-[#e4e7ec] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]">
+                  <div className="flex items-center gap-2 px-3 py-2.5">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-violet-50 text-violet-600">
+                      <Sparkles className="h-3.5 w-3.5" />
+                    </span>
+                    <span className="truncate text-[13px] font-medium text-[#121417]">{t.classifyLabel}</span>
+                    <span className="ml-auto shrink-0 rounded-md border border-[#e4e7ec] bg-white px-1.5 py-0.5 text-[11px] text-[#626874]">
                       AI Extract
                     </span>
                   </div>
-                  <div className="mt-2.5 grid grid-cols-2 gap-2 text-[11px] font-mono text-[#8C94A7]">
-                    <div className="bg-[#0B0E15] p-2 rounded border border-[#1B2232]">
-                      <span className="text-[#555C6E] block">INTENT:</span>
-                      <span className="text-[#F4F2ED]">{activeData.extracted.intent}</span>
-                    </div>
-                    <div className="bg-[#0B0E15] p-2 rounded border border-[#1B2232]">
-                      <span className="text-[#555C6E] block">PARTY:</span>
-                      <span className="text-[#10B981] font-semibold">{activeData.extracted.party}</span>
+                  <div className="border-t border-[#e4e7ec] px-3 py-2.5 text-left text-xs leading-relaxed text-[#626874]">
+                    <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
+                      <div className="p-1.5 rounded bg-[#f8f9fb] border border-[#e4e7ec]">
+                        <span className="text-[#98a2b3] block text-[10px]">INTENT:</span>
+                        <span className="text-[#121417] font-semibold">{activeData.extracted.intent}</span>
+                      </div>
+                      <div className="p-1.5 rounded bg-[#f8f9fb] border border-[#e4e7ec]">
+                        <span className="text-[#98a2b3] block text-[10px]">PARTY:</span>
+                        <span className="text-[#0b935d] font-semibold">{activeData.extracted.party}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Branching SVG */}
-                <div className="relative h-9 w-full">
+                <div className="relative h-9 w-full my-1">
                   <svg
                     viewBox="0 0 400 36"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-full h-full"
+                    className="h-9 w-full"
                     preserveAspectRatio="none"
                   >
                     <path
                       d="M200 0 V8 Q200 18 100 18 V36"
-                      stroke="#27324A"
-                      strokeWidth="1.5"
+                      stroke="hsl(220 13% 91%)"
+                      strokeWidth="1.2"
                     />
                     <path
                       d="M200 0 V8 Q200 18 300 18 V36"
-                      stroke="#27324A"
-                      strokeWidth="1.5"
+                      stroke="hsl(220 13% 91%)"
+                      strokeWidth="1.2"
                     />
                     <path
                       d="M200 0 V8 Q200 18 100 18 V36"
-                      stroke="#D6A856"
-                      strokeWidth="1.5"
-                      strokeDasharray="6 40"
+                      stroke="#0b935d"
+                      strokeOpacity="0.75"
+                      strokeWidth="1.4"
+                      strokeDasharray="4 24"
                       className="animate-beam-flow"
                     />
                     <path
                       d="M200 0 V8 Q200 18 300 18 V36"
-                      stroke="#10B981"
-                      strokeWidth="1.5"
-                      strokeDasharray="6 40"
+                      stroke="#384bc7"
+                      strokeOpacity="0.75"
+                      strokeWidth="1.4"
+                      strokeDasharray="4 24"
                       className="animate-beam-flow"
                       style={{ animationDelay: '0.5s' }}
                     />
@@ -225,29 +220,29 @@ export const OneFunnelSection: React.FC<OneFunnelSectionProps> = ({ locale, onOp
                 {/* Node 3 & 4: Branching Actions */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   {/* Action 1: Draft Reply */}
-                  <div className="rounded-xl border border-[#242F46] bg-[#0E131F] p-3.5">
-                    <div className="flex items-center gap-2 mb-1.5 text-xs">
-                      <span className="w-5 h-5 rounded bg-[#F59E0B]/15 text-[#FBBF24] flex items-center justify-center">
-                        <FileText className="w-3 h-3" />
+                  <div className="rounded-xl border border-[#e4e7ec] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]">
+                    <div className="flex items-center gap-2 px-3 py-2.5">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-orange-50 text-orange-600">
+                        <FileText className="h-3.5 w-3.5" />
                       </span>
-                      <span className="font-medium text-[#F4F2ED]">{t.draftLabel}</span>
+                      <span className="truncate text-[13px] font-medium text-[#121417]">{t.draftLabel}</span>
                     </div>
-                    <p className="text-[11px] text-[#868D9E] leading-relaxed">
+                    <div className="border-t border-[#e4e7ec] px-3 py-2 text-left text-xs leading-relaxed text-[#626874]">
                       {t.draftText}
-                    </p>
+                    </div>
                   </div>
 
                   {/* Action 2: Book Table */}
-                  <div className="rounded-xl border border-[#242F46] bg-[#0E131F] p-3.5">
-                    <div className="flex items-center gap-2 mb-1.5 text-xs">
-                      <span className="w-5 h-5 rounded bg-[#10B981]/15 text-[#34D399] flex items-center justify-center">
-                        <CalendarCheck className="w-3 h-3" />
+                  <div className="rounded-xl border border-[#e4e7ec] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]">
+                    <div className="flex items-center gap-2 px-3 py-2.5">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-emerald-600">
+                        <CalendarCheck className="h-3.5 w-3.5" />
                       </span>
-                      <span className="font-medium text-[#F4F2ED]">{t.bookLabel}</span>
+                      <span className="truncate text-[13px] font-medium text-[#121417]">{t.bookLabel}</span>
                     </div>
-                    <p className="text-[11px] text-[#868D9E] leading-relaxed">
+                    <div className="border-t border-[#e4e7ec] px-3 py-2 text-left text-xs leading-relaxed text-[#626874]">
                       {t.bookText}
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>
