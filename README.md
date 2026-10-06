@@ -1,32 +1,64 @@
-# React + TypeScript + Vite
+# Maxander — AI Booking & Inbox Automation for Restaurants
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Maxander is an AI-powered operations engine designed for modern hospitality groups and high-volume restaurants. It automates inbound reservations, private dining inquiries, guest support across multiple channels, and integrates seamlessly with OpenTable, SevenRooms, Resy, and POS systems.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- **Autonomous Multi-Channel Inbox**: Handles email, SMS, and web guest inquiries in seconds.
+- **Smart Booking & Availability Integration**: Direct sync with OpenTable, SevenRooms, Resy, and Toast POS.
+- **Dynamic Capacity Management**: Maximizes covers with automated waitlist re-engagement and VIP guest routing.
+- **Interactive Automation Simulator**: Real-time interactive demo showcasing live guest inquiry handling.
+- **Operations Dashboard**: Visual breakdown of response latency, automated covers, saved labor hours, and guest satisfaction ratings.
+- **Custom Knowledge Base**: Fine-tuned on restaurant menus, dietary rules, floor plans, and VIP guest profiles.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- **Framework**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS v4 + Custom Glassmorphism & Micro-animations
+- **Icons**: Lucide React & React Icons
+- **Interactive Elements**: Canvas Confetti, WebGL/OGL background effects, Custom FlipCards
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure you have [Node.js](https://nodejs.org/) (v18+ recommended) installed.
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/nakulbhamare/maxander.git
+
+# Navigate to directory
+cd maxander
+
+# Install dependencies
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Running Locally
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`.
+
+### Production Build
+
+```bash
+npm run build
+```
+
+---
+
+## 📄 License
+
+Private / Proprietary. All rights reserved.
